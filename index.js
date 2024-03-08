@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.get('/total', (req, res) => {
 app.post('/submit', (req, res) => {
     const {email, password} = req.body;
     if (!email || !password) {
